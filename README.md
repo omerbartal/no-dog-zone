@@ -55,3 +55,4 @@ There are lots of improvements which can be done to the project if anyone wants 
 - More actions
 - Support for speakers playing audio (initial support exists)
 - Support for more inputs (like the Raspberry Pi camera, a windows camera, etc)
+- A printable box with wall mount
