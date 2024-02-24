@@ -1,0 +1,6 @@
+*~
+images
+output
+Pipfile.lock
+.DS_Store
+__pycache__

@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+torch = "*"
+torchvision = "*"
+torchaudio = "*"
+opencv-python = "*"
+numpy = "*"
+opencv-contrib-python = "*"
+imutils = "*"
+flask = "*"
+python-telegram-bot = "==13.12"
+scikit-video = "*"
+tflite-runtime = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
