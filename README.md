@@ -36,8 +36,8 @@ Meanwhile, the general idea is:
    - Send a direct message to the bot
    - Run `pipenv run ./telegram_bot.py -u`
    - `./params -s 'telegram_token="<your bot token\>"'`
-   - `./params -s 'telegram_admin="<your personal id\>"'`
-   - `./params -s 'telegram_chat_id="<group id\>"'`
+   - `./params -s 'telegram_admin=<your personal id\>'`
+   - `./params -s 'telegram_chat_id=<group id\>'`
 - Configure area of intereset
   - Run the app (reboot or it using `pipenv run ./app.py --src v4l2 --dst output --params params.json --log output/dog_detect.log -v`)
   - Connect to `http://<ip addr>:8000/`
@@ -46,12 +46,13 @@ Meanwhile, the general idea is:
   - This one is harder to explain. Ping me and I'll add more instuctions. 
 - Done!
 
-# Todo list:
-There are lots of improvements which can be done to the project if anyone wants to contribute:
-- Build a real package and installer
-- Write an app to calibrate the tool and to get notifications from it
-- Integrate other and better models
-- Detect more complicated stuff
-- More actions
-- Support for speakers playing audio (initial support exists)
-- Support for more inputs (like the Raspberry Pi camera, a windows camera, etc)
+# Contributing
+This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful.
+
+Please feel free to contact me directly if you're interested. That's the best way to show interest in the project :)
+
+The nice thing about this project is that it can turn into anything which meets the definition:
+
+detect something using a pretrained model --> do something with hardware
+
+I've started a todo list under the [`CONTRIBUTING`](CONTRIBUTING.md) file.
