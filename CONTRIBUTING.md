@@ -9,7 +9,8 @@ There are lots of improvements which can be done to the project if anyone wants 
 - Build a real package and installer
 - Write an app to calibrate the tool and to get notifications from it
 - Integrate other and better models
-- Detect more complicated stuff
+- Detect more types of pets
+- Detect complicated stuff (like "dog sitting on couch" and not just a dog)
 - More actions
 - Support for speakers playing audio (initial support exists)
 - Support for more inputs (like the Raspberry Pi camera, a windows camera, etc)
