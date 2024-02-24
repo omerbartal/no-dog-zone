@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Detect</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Detector</h1>
+    <table border=0>
+      <tr>
+	<td>
+	  <img src="{{ url_for('video_feed') }}" width=500>
+	</td>
+	<td VALIGN=top>
+	  <select id="img_source" size="7">  
+	    <option value="base_image">Base Image</option>  
+	    <option value="marked">Marked</option>  
+	    <option value="cropped">Cropped</option>  
+	    <option value="hidden">Hidden</option>  
+	    <option value="scaled">Scaled</option>  
+	    <option value="scaled_rgb">Scaled RGB</option>  
+	    <option value="inferred">Inferred</option>  
+	  </select>
+	  <h1>Markers</h1>
+	  <table border=0>
+	    <tr> <td align=center colspan=3></td> <td colspan=2 align=center><button id="main_up">Up</button></td>                                               <td></td> </tr>
+	    <tr> <td align=center colspan=3></td> <td align=center><button id="top1_up">U</button></td>  <td align=center><button id="top2_up">U</button></td>   <td></td> </tr>
+	    <tr> <td align=center colspan=3></td> <td align=center><button id="top1_down">D</button></td><td align=center><button id="top2_down">D</button></td> <td></td> </tr>
+	    
+	    <tr> <td rowspan=2><button id="main_left">Left</button></td> <td> <button id="left1_left">L</button>  </td> <td> <button id="left1_right">R</button>  </td>
+	                                                         <td colspan=2></td>
+	      <td> <button id="right1_left">L</button>  </td> <td> <button id="right1_right">R</button>  </td> <td rowspan=2><button id="main_right">Right</button></td> </tr>
+
+
+	    <tr>               <td> <button id="left2_left">L</button>  </td> <td> <button id="left2_right">R</button>  </td>
+	                                                         <td colspan=2></td>
+	      <td> <button id="right2_left">L</button>  </td> <td> <button id="right2_right">R</button>  </td>  </tr>
+	    
+	    
+	    <tr> <td align=center colspan=3></td> <td align=center><button id="bottom1_up">U</button></td>  <td align=center><button id="bottom2_up">U</button></td>   <td></td> </tr>
+	    <tr> <td align=center colspan=3></td> <td align=center><button id="bottom1_down">D</button></td><td align=center><button id="bottom2_down">D</button></td> <td></td> </tr>
+	    <tr> <td colspan=3></td>                                     <td colspan=2><button id="main_down">Down</button></td> <td colspan=2></td>           <td><button id="smaller">-</button>
+		                                                                                                                                                   <button id="bigger">+</button></td> </tr>
+	  </table>
+	</td>
+      </tr>
+    </table>
+
+    <table id="inference_table" border=1>
+        <thead>
+            <tr>
+                <th>Prob</th>
+                <th>Class</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    
+
+    <script>
+
+      function register_button(button_name) {
+	  $('#'+button_name).click(function() {$.post('/main', {'move':button_name});});
+      }
+
+      register_button("bigger")
+      register_button("smaller")
+      
+      register_button("main_up")
+      register_button("main_down")
+      register_button("main_left")
+      register_button("main_right")
+
+      register_button("top1_up")
+      register_button("top1_down")
+      register_button("top2_up")
+      register_button("top2_down")
+      
+      register_button("bottom1_up")
+      register_button("bottom1_down")
+      register_button("bottom2_up")
+      register_button("bottom2_down")
+
+      register_button("left1_left")
+      register_button("left1_right")
+      register_button("left2_left")
+      register_button("left2_right")
+
+      register_button("right1_left")
+      register_button("right1_right")
+      register_button("right2_left")
+      register_button("right2_right")
+      
+      // $('#decrement').click(function() {
+      //     $.post('/decrement', function(data) {
+      //         $('#counter').text(data);
+      //     });
+      // });
+      $('#img_source').on("change", function() {
+	  var val = $('#img_source').val();
+          $.post('/img_source', {"image_source":val});
+      });
+
+
+      function updateTable() {
+	  $.get('/get_inference', function(data) {
+	      
+              $('#inference_table tbody').empty();
+
+              data.forEach(function(row) {
+                  $('#inference_table tbody').append(
+                      '<tr><td>' + row.prob + '</td><td>' + row.cls + '</td></tr>'
+                  );
+              });
+            });
+        }
+
+        // Call the updateTable function every 5 seconds (adjust the interval as needed)
+        setInterval(updateTable, 500);
+        
+        // Initial table update on page load
+        updateTable();      
+    </script>
+    
+  </body>
+</html>

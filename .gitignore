@@ -4,3 +4,6 @@ output
 Pipfile.lock
 .DS_Store
 __pycache__
+no-dog-zone.log
+params.json
+yolo4tiny/
