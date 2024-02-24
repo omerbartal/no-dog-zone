@@ -1,7 +1,6 @@
 #!/bin/sh
 
 base_dir=$(dirname $(readlink -f $0))
-#/home/omer/git/detect_dog
 
 if ! tmux has-session -t dog_detect; then
     tmux new-session -d -s dog_detect -n dog_detect
