@@ -1,5 +1,5 @@
 # Hi
-This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful. If there's interest this project can grow.
+This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful.
 
 Please feel free to contact me directly if you're interested. That's the best way to show interest in the project :)
 
