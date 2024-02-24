@@ -36,8 +36,8 @@ Meanwhile, the general idea is:
    - Send a direct message to the bot
    - Run `pipenv run ./telegram_bot.py -u`
    - `./params -s 'telegram_token="<your bot token\>"'`
-   - `./params -s 'telegram_admin="<your personal id\>"'`
-   - `./params -s 'telegram_chat_id="<group id\>"'`
+   - `./params -s 'telegram_admin=<your personal id\>'`
+   - `./params -s 'telegram_chat_id=<group id\>'`
 - Configure area of intereset
   - Run the app (reboot or it using `pipenv run ./app.py --src v4l2 --dst output --params params.json --log output/dog_detect.log -v`)
   - Connect to `http://<ip addr>:8000/`
