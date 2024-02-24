@@ -46,14 +46,13 @@ Meanwhile, the general idea is:
   - This one is harder to explain. Ping me and I'll add more instuctions. 
 - Done!
 
-# Todo list:
-There are lots of improvements which can be done to the project if anyone wants to contribute:
-- Document the project
-- Build a real package and installer
-- Write an app to calibrate the tool and to get notifications from it
-- Integrate other and better models
-- Detect more complicated stuff
-- More actions
-- Support for speakers playing audio (initial support exists)
-- Support for more inputs (like the Raspberry Pi camera, a windows camera, etc)
-- A printable box with wall mount
+# Contributing
+This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful. If there's interest this project can grow.
+
+Please feel free to contact me directly if you're interested. That's the best way to show interest in the project :)
+
+The nice thing about this project is that it can turn into anything which meets the definition:
+
+detect something using a pretrained model --> do something with hardware
+
+I've started a todo list under the [`CONTRIBUTING`](CONTRIBUTING.md) file.
