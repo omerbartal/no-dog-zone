@@ -1,7 +1,11 @@
-# New project notice
-This is a very new project. If people are interested it will grow. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful.
+# Hi
+This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful. If there's interest this project can grow.
 
-Please feel free to contact me directly if you're interested.
+Please feel free to contact me directly if you're interested. That's the best way to show interest in the project :)
+
+The nice thing about this project is that it can turn into anything which meets the definition:
+
+detect something using a pretrained model --> do something with hardware
 
 # Todo list:
 There are lots of improvements which can be done to the project if anyone wants to contribute:
