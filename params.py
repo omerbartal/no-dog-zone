@@ -7,6 +7,7 @@ filename = None
 
 params = {
     'inference':True,
+    'time_lapse':True,
     'play_audio':False,
     'store_inference':False,
     'scale_start_x':0,

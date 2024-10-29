@@ -8,4 +8,4 @@ if ! tmux has-session -t dog_detect; then
 fi
 
 tmux send-keys -t dog_detect.1 "cd $base_dir" C-m
-tmux send-keys -t dog_detect.1 "pipenv run ./app.py --src v4l2 --dst output --params params.json --log no-dog-zone.log -v" C-m
+tmux send-keys -t dog_detect.1 "pipenv run ./app.py --src v4l2 --dst output --params params.json --log no-dog-zone.log -v --mode inference" C-m

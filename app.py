@@ -113,6 +113,7 @@ if __name__ == "__main__":
     parser.add_argument("--src", action="store", default=None)
     parser.add_argument("--dst", action="store", default=None)
     parser.add_argument("--params", action="store", default='params.json')
+    parser.add_argument("--mode", action="store", help="inference, time_lapse", default=None)
     parser.add_argument("--no-timing", action="store_false", default=True, dest='print_timing')
     parser.add_argument("-v", dest='verbose', action="count", default=0)
     parser.add_argument("--log", action="store", default=None)
@@ -146,9 +147,12 @@ if __name__ == "__main__":
 
     TelegramBot()
     Upload()
-    
-    # inference_thread_fn()
-    detect.start_inference()
+
+    if args.mode == 'inference':
+        # inference_thread_fn()
+        detect.start_inference()
+    elif args.mode == 'time_lapse':
+        detect.start_time_lapse()
 
     import ui
     ui.run()

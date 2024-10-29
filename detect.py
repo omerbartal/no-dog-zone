@@ -7,6 +7,7 @@ import subprocess
 import select
 import datetime
 import telegram_bot
+import timing
 
 from log import logger
 
@@ -36,6 +37,7 @@ class DetectedClasses:
 
 
         if curr.get('person', 0) > 0.2:
+            timing.event('person')
             trigger.hard_stop()
 
         self.past_dog_detections.append(curr.get('dog', 0))
@@ -43,6 +45,7 @@ class DetectedClasses:
 
         metadata['history'] = self.past_dog_detections
         if ( (len([x for x in self.past_dog_detections if x > 0.4]) >= 3) ):
+            timing.event('dog')
             if ( (len([x for x in self.past_dog_detections if x > 0.6]) >= 1) ):
                 metadata['audio'] = True
                 trigger.trigger('dog', start_audio=True, metadata=metadata)
@@ -141,6 +144,7 @@ def start_inference():
     inference_thread.start()
 
 
+    
 class PostponedTimer:
     def __init__(self, postpone_time):
         self.postpone_time = postpone_time
@@ -253,15 +257,16 @@ class Trigger(threading.Thread):
 
     def play_audio(self):
 
-        if not params.get('play_audio', False):
-            return
+        timing.event('audio')
         
         with self.lock:
-            self.gpio.set(1)
+            if params.get('play_audio', False):
+                self.gpio.set(1)
 
             if not self.audio_playing:
-                telegram_bot.get_chat().send_message('starting audio')
-                logger.info('starting audio')
+                msg = '%sstarting audio' % ('' if params.get('play_audio', False) else '(not) ')
+                telegram_bot.get_chat().send_message(msg)
+                logger.info(msg)
             
             self.audio_playing = True
             

@@ -370,7 +370,7 @@ class VideoThread(threading.Thread):
         self.video_store.store(image, self.labels)
             
     def run(self):
-        self.capture_iter = images('hidden')
+        self.capture_iter = images('cropped')
         for image in self.capture_iter:
             with self.lock:
                 if self.to_store_video:
