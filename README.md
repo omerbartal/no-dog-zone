@@ -21,7 +21,7 @@ I've successfuly trained my dog with this app.
 Obviously, other setups can also work.
 
 # Instructions
-Since I don't know if anyone will use this project I don't want to waste time writing very detailed instructions. If you want to use this, please feel free to ping me and I'll gladly add better instructions.
+Since I don't know if anyone will use this project I don't want to waste time writing very detailed instructions. If you want to use this, please feel free to [ping me](https://twitter.com/omer_bartal) and I'll gladly add better instructions.
 
 Meanwhile, the general idea is:
 - Install `pipenv`, `tmux` and `curl`
@@ -49,7 +49,7 @@ Meanwhile, the general idea is:
 # Contributing
 This is a very new project. I've never managed an open source project so any help would be great, even managing contributions and building procedures would be helpful.
 
-Please feel free to contact me directly if you're interested. That's the best way to show interest in the project :)
+Please feel free to [contact me directly](https://twitter.com/omer_bartal) if you're interested. That's the best way to show interest in the project :)
 
 The nice thing about this project is that it can turn into anything which meets the definition:
 
