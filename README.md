@@ -34,10 +34,10 @@ Meanwhile, the general idea is:
    - Create a Telegram bot
    - Create a group with you and the bot
    - Send a direct message to the bot
+   - `pipenv run ./params.py -s 'telegram_token="<your bot token\>"'`
    - Run `pipenv run ./telegram_bot.py -u`
-   - `./params -s 'telegram_token="<your bot token\>"'`
-   - `./params -s 'telegram_admin=<your personal id\>'`
-   - `./params -s 'telegram_chat_id=<group id\>'`
+   - `pipenv run ./params.py -s 'telegram_admin=<your personal id\>'`
+   - `pipenv run ./params.py -s 'telegram_chat_id=<group id\>'`
 - Configure area of intereset
   - Run the app (reboot or it using `pipenv run ./app.py --src v4l2 --dst output --params params.json --log output/dog_detect.log -v`)
   - Connect to `http://<ip addr>:8000/`

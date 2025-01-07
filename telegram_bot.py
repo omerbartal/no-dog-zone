@@ -225,7 +225,8 @@ class TelegramBot:
 
         
         for u in self.iter_updates():
-            yield u['callback_query']['data']
+            if 'callback_query' in u:
+                yield u['callback_query']['data']
     
         
 _chat = None
@@ -282,7 +283,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', dest='read_chat_ids', action='store_true', default=False, help="read chat ids")
-    parser.add_argument('-u', dest='updates', action='store_true', default=False, help="read chat ids")
+    parser.add_argument('-u', dest='updates', action='store_true', default=False, help="updates")
     parser.add_argument('-t', dest='test_message', action='store', default=None, help="send a test message to chat id")
     parser.add_argument('-f', dest='upload_file', action='store', default=None, help="")
     parser.add_argument("--params", action="store", default='params.json')
