@@ -14,7 +14,14 @@ from log import logger
 # model = 'pytorch'
 model = 'yolo'
 
-INFERENCE_WINDOW_TIME = 5
+UI_INFERENCE_WINDOW_TIME = 5 # seconds
+TRIGGER_DETECTION_WINDOW = 5 # detections
+
+MIN_VIDEO_CERTAINTY = 0.4
+MIN_VIDEO_EVENTS = 3
+
+MIN_AUDIO_CERTAINTY = 0.7
+MIN_AUDIO_EVENTS = 1
 
 class DetectedClasses:
     def __init__(self):
@@ -33,7 +40,7 @@ class DetectedClasses:
             
             self.window.append({'time':time.time(), 'detections':curr})
 
-            self.window = [x for x in self.window if x['time'] >= time.time() - INFERENCE_WINDOW_TIME]
+            self.window = [x for x in self.window if x['time'] >= time.time() - UI_INFERENCE_WINDOW_TIME]
 
 
         if curr.get('person', 0) > 0.2:
@@ -41,12 +48,12 @@ class DetectedClasses:
             trigger.hard_stop()
 
         self.past_dog_detections.append(curr.get('dog', 0))
-        self.past_dog_detections = self.past_dog_detections[-5:]
+        self.past_dog_detections = self.past_dog_detections[-TRIGGER_DETECTION_WINDOW:]
 
         metadata['history'] = self.past_dog_detections
-        if ( (len([x for x in self.past_dog_detections if x > 0.4]) >= 3) ):
+        if ( (len([x for x in self.past_dog_detections if x > MIN_VIDEO_CERTAINTY]) >= MIN_VIDEO_EVENTS) ):
             timing.event('dog')
-            if ( (len([x for x in self.past_dog_detections if x > 0.6]) >= 1) ):
+            if ( (len([x for x in self.past_dog_detections if x > MIN_AUDIO_CERTAINTY]) >= MIN_AUDIO_EVENTS) ):
                 metadata['audio'] = True
                 trigger.trigger('dog', start_audio=True, metadata=metadata)
             else:
@@ -176,7 +183,46 @@ class GPIO:
         self.base_dir = f'/sys/class/gpio/gpio{self.pin}'
         self.lock = threading.Lock()
 
+        self.use_pinctrl = os.path.exists('/usr/bin/pinctrl')
+
     def do_init(self):
+        if self.use_pinctrl:
+            self.do_init_pinctrl()
+        else:
+            self.do_init_sysfs()
+
+    def set(self, value):
+        if self.use_pinctrl:
+            self.set_pinctrl(value)
+        else:
+            self.set_sysfs(value)
+            
+    def do_init_pinctrl(self):
+        with self.lock:
+            if self.init_done:
+                return
+            try:
+                if os.system(f'pinctrl set {self.pin} op') == 0:
+                    self.init_done = True
+            except Exception:
+                logger.exception('failed gpio init')
+
+    def set_pinctrl(self, value):
+        self.do_init()
+        if self.init_done:
+            try:
+                if value:
+                    value_str = 'dh'
+                else:
+                    value_str = 'dl'
+                    
+                if os.system(f'pinctrl set {self.pin} {value_str}') != 0:
+                    logger.error('failed setting gpio')
+            except Exception:
+                logger.exception('failed gpio init')
+        
+        
+    def do_init_sysfs(self):
         with self.lock:
             if self.init_done:
                 return
@@ -188,7 +234,7 @@ class GPIO:
             except Exception:
                 logger.exception('failed gpio init')
 
-    def set(self, value):
+    def set_sysfs(self, value):
         self.do_init()
         if self.init_done:
             try:
