@@ -15,6 +15,7 @@ flask = "*"
 python-telegram-bot = "==13.12"
 scikit-video = "*"
 tflite-runtime = "*"
+pillow = "*"
 
 [dev-packages]
 
